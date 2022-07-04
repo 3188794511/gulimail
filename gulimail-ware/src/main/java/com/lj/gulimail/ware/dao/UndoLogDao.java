@@ -1,0 +1,17 @@
+package com.lj.gulimail.ware.dao;
+
+import com.lj.gulimail.ware.entity.UndoLogEntity;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Mapper;
+
+/**
+ * 
+ * 
+ * @author lijing
+ * @email 3188794511@qq.com
+ * @date 2022-06-21 09:29:52
+ */
+@Mapper
+public interface UndoLogDao extends BaseMapper<UndoLogEntity> {
+	
+}

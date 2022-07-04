@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: gulimail-third-party
+  cloud:
+    nacos:
+      server-addr: 127.0.0.1:8848
+server:
+  port: 9097
+alibaba:
+  cloud:
+    oss:
+      endpoint: oss-cn-hangzhou.aliyuncs.com
+      bucket: lj-gulimai
+    access-key: LTAI5tFxjCNoKZLC4RyiJrJq
+    secret-key: YjAoFw5mTzgnvmPgb6UOQxBlAZTLUf
+
