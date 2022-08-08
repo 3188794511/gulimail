@@ -6,7 +6,7 @@ package com.lj.gulimail.product.enums;
  */
 public enum MyExceptionEnum {
     VALID_EXCEPTION(401,"提交的数据不合法"),
-    COMMON_EXCEPTION(500,"服务器异常");
+    COMMON_EXCEPTION(500,"未知异常");
 
     private Integer code;
     private String msg;

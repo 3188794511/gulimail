@@ -6,10 +6,25 @@ spring:
   datasource:
     username: root
     password: root
-    url: jdbc:mysql://192.168.171.210:3307/gulimall_wms?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false
+    url: jdbc:mysql://192.168.171.200:3307/gulimall_wms?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false
     driver-class-name: com.mysql.cj.jdbc.Driver
+  cloud:
+    nacos:
+      server-addr: 127.0.0.1:8848
+  application:
+    name: gulimail-ware
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+#nacos
+#MP
 mybatis-plus:
   mapper-locations: classpath:/mapper/**/*.xml
   global-config:
     db-config:
       id-type: auto
+#日志级别
+logging:
+  level:
+    com.lj.gulimail.ware: debug
+#日期格式化

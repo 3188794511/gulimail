@@ -2,11 +2,10 @@ package com.lj.gulimail.coupon.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-
-import java.math.BigDecimal;
-import java.io.Serializable;
-import java.util.Date;
 import lombok.Data;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * 商品满减信息
@@ -42,4 +41,12 @@ public class SmsSkuFullReductionEntity implements Serializable {
 	 */
 	private Integer addOther;
 
+	/**
+	 *   private BigDecimal fullCount;
+	 *     private BigDecimal discount;
+	 *     private int countStatus;
+	 *     private BigDecimal fullPrice;
+	 *     private BigDecimal reducePrice;
+	 *     private int priceStatus;
+	 */
 }

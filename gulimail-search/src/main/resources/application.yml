@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: gulimail-search
+  cloud:
+    nacos:
+      server-addr: localhost:8848
+server:
+  port: 9095
+logging:
+  level:
+    com:
+      lj:
+        gulimail:
+          search: debug

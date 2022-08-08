@@ -1,19 +1,14 @@
 package com.lj.gulimail.ware.controller;
 
-import java.util.Arrays;
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.lj.gulimail.ware.entity.WmsPurchaseDetailEntity;
-import com.lj.gulimail.ware.service.WmsPurchaseDetailService;
 import com.lj.common.utils.PageUtils;
 import com.lj.common.utils.R;
+import com.lj.gulimail.ware.entity.WmsPurchaseDetailEntity;
+import com.lj.gulimail.ware.service.WmsPurchaseDetailService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Arrays;
+import java.util.Map;
 
 
 
@@ -25,7 +20,7 @@ import com.lj.common.utils.R;
  * @date 2022-06-21 09:29:52
  */
 @RestController
-@RequestMapping("ware/wmspurchasedetail")
+@RequestMapping("ware/purchasedetail")
 public class WmsPurchaseDetailController {
     @Autowired
     private WmsPurchaseDetailService wmsPurchaseDetailService;
@@ -50,7 +45,7 @@ public class WmsPurchaseDetailController {
     public R info(@PathVariable("id") Long id){
 		WmsPurchaseDetailEntity wmsPurchaseDetail = wmsPurchaseDetailService.getById(id);
 
-        return R.ok().put("wmsPurchaseDetail", wmsPurchaseDetail);
+        return R.ok().put("purchaseDetail", wmsPurchaseDetail);
     }
 
     /**

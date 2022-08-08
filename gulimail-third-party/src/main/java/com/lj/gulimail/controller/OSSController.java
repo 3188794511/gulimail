@@ -18,9 +18,11 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import static com.lj.gulimail.constant.OssConstant.UPLOAD_ROOT_PATH;
+import static com.lj.gulimail.constant.OssConstant.UPLOAD_URL;
 import static com.lj.gulimail.util.AliyunOssUtil.filePath;
 
 @RestController
+@RequestMapping("/thirdparty")
 @Slf4j
 public class OSSController {
     @Autowired
@@ -36,7 +38,6 @@ public class OSSController {
 
 
     @RequestMapping("/oss/policy")
-    @CrossOrigin
     public R policy(){
         // 填写Host地址，格式为https://bucketname.endpoint。
         String host = "https://" + bucket + "." + endpoint;
@@ -57,7 +58,7 @@ public class OSSController {
             String encodedPolicy = BinaryUtil.toBase64String(binaryData);
             String postSignature = ossClient.calculatePostSignature(postPolicy);
             respMap = new LinkedHashMap<String, String>();
-            respMap.put("accessKey", accessKey);
+            respMap.put("accessid", accessKey);
             respMap.put("policy", encodedPolicy);
             respMap.put("signature", postSignature);
             respMap.put("dir", dir);
@@ -77,15 +78,14 @@ public class OSSController {
      * @return
      */
     @PostMapping("/upload")
-    @CrossOrigin
     public R upload(@RequestParam("file") MultipartFile uploadFile){
         try {
             String originalFilename = uploadFile.getOriginalFilename();
             AliyunOssUtil.findFilePath(originalFilename,UPLOAD_ROOT_PATH);
-            String path = filePath;
-            System.out.println(originalFilename);
-            String fileName = AliyunOssUtil.upload(ossClient, bucket, path);
-            return R.ok().put("fileName",fileName);
+            String fileName = AliyunOssUtil.upload(ossClient, bucket, filePath);
+            String fileUrl = UPLOAD_URL + fileName;
+            log.info("生成的文件地址为:{}",fileUrl);
+            return R.ok().put("data",fileUrl);
         } catch (Exception e) {
             e.printStackTrace();
             return R.error();

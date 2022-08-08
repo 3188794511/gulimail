@@ -1,19 +1,14 @@
 package com.lj.gulimail.ware.controller;
 
-import java.util.Arrays;
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.lj.gulimail.ware.entity.WmsWareInfoEntity;
-import com.lj.gulimail.ware.service.WmsWareInfoService;
 import com.lj.common.utils.PageUtils;
 import com.lj.common.utils.R;
+import com.lj.gulimail.ware.entity.WmsWareInfoEntity;
+import com.lj.gulimail.ware.service.WmsWareInfoService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Arrays;
+import java.util.Map;
 
 
 
@@ -25,7 +20,7 @@ import com.lj.common.utils.R;
  * @date 2022-06-21 09:29:52
  */
 @RestController
-@RequestMapping("ware/wmswareinfo")
+@RequestMapping("ware/wareinfo")
 public class WmsWareInfoController {
     @Autowired
     private WmsWareInfoService wmsWareInfoService;
@@ -49,8 +44,7 @@ public class WmsWareInfoController {
     //@RequiresPermissions("ware:wmswareinfo:info")
     public R info(@PathVariable("id") Long id){
 		WmsWareInfoEntity wmsWareInfo = wmsWareInfoService.getById(id);
-
-        return R.ok().put("wmsWareInfo", wmsWareInfo);
+        return R.ok().put("wareInfo", wmsWareInfo);
     }
 
     /**

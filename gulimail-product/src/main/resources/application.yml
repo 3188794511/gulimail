@@ -7,13 +7,24 @@ spring:
   datasource:
     username: root
     password: root
-    url: jdbc:mysql://192.168.171.210:3307/gulimall_pms?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false
+    url: jdbc:mysql://192.168.171.200:3307/gulimall_pms?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false
     driver-class-name: com.mysql.cj.jdbc.Driver
   #nacos注册中心配置
   cloud:
     nacos:
       server-addr: 127.0.0.1:8848
-  #MP
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  thymeleaf:
+    cache: false
+  #redis
+  redis:
+    host: 192.168.171.200
+    port: 6380
+  application:
+    name: gulimail-product
+#MP
 mybatis-plus:
   mapper-locations: classpath:/mapper/**/*.xml
   global-config:
@@ -21,3 +32,10 @@ mybatis-plus:
       id-type: auto
       logic-delete-value: 1 # 逻辑已删除值(默认为 1)
       logic-not-delete-value: 0 # 逻辑未删除值(默认为 0)
+#日志级别
+logging:
+  level:
+    com:
+      lj:
+        gulimail:
+          product: debug

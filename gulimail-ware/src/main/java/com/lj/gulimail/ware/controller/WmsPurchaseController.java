@@ -1,19 +1,17 @@
 package com.lj.gulimail.ware.controller;
 
-import java.util.Arrays;
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.lj.gulimail.ware.entity.WmsPurchaseEntity;
-import com.lj.gulimail.ware.service.WmsPurchaseService;
 import com.lj.common.utils.PageUtils;
 import com.lj.common.utils.R;
+import com.lj.gulimail.ware.entity.WmsPurchaseEntity;
+import com.lj.gulimail.ware.service.WmsPurchaseService;
+import com.lj.gulimail.ware.vo.MergeVo;
+import com.lj.gulimail.ware.vo.PurchaseDoneVo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 
 
@@ -25,10 +23,46 @@ import com.lj.common.utils.R;
  * @date 2022-06-21 09:29:52
  */
 @RestController
-@RequestMapping("ware/wmspurchase")
+@RequestMapping("ware/purchase")
 public class WmsPurchaseController {
     @Autowired
     private WmsPurchaseService wmsPurchaseService;
+    /**
+     * 查询未分配或新建的采购信息
+     */
+    @GetMapping("/unreceive/list")
+    public R queryUnReceive(){
+        List<WmsPurchaseEntity> purchaseEntities= wmsPurchaseService.queryUnReceive();
+        return R.ok().put("data", purchaseEntities);
+    }
+
+    /**
+     * 合并采购项
+     * @param mergeVo
+     * @return
+     */
+    @PostMapping("/merge")
+    public R merge(@RequestBody MergeVo mergeVo){
+        wmsPurchaseService.merge(mergeVo);
+        return R.ok();
+    }
+
+    /**
+     * 正在采购
+     * @param ids
+     * @return
+     */
+    @PostMapping("/received")
+    public R received(@RequestBody List<Long> ids){
+        wmsPurchaseService.received(ids);
+        return R.ok();
+    }
+
+    @PostMapping("/done")
+    public R finish(@RequestBody PurchaseDoneVo purchaseDoneVo){
+        wmsPurchaseService.done(purchaseDoneVo);
+        return R.ok();
+    }
 
     /**
      * 列表
@@ -50,7 +84,7 @@ public class WmsPurchaseController {
     public R info(@PathVariable("id") Long id){
 		WmsPurchaseEntity wmsPurchase = wmsPurchaseService.getById(id);
 
-        return R.ok().put("wmsPurchase", wmsPurchase);
+        return R.ok().put("purchase", wmsPurchase);
     }
 
     /**

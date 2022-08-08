@@ -1,26 +1,26 @@
-#server:
-#  port: 9091
-#  servlet:
-#    context-path: /
-#spring:
-#  datasource:
-#    #MySQL配置
-#    driverClassName: com.mysql.cj.jdbc.Driver
-#    url: jdbc:mysql://192.168.171.210:3307/gulimall_sms?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
-#    username: root
-#    password: root
-#  #服务名
-#  application:
-#    name: gulimail-coupon
-#  #nacos配置
-#  cloud:
-#    nacos:
-#      server-addr: 127.0.0.1:8848
-#
-##mp配置
-#mybatis-plus:
-#  global-config:
-#    db-config:
-#      id-type: auto
-#  configuration:
-#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+server:
+  port: 9091
+  servlet:
+    context-path: /
+spring:
+  datasource:
+    #MySQL配置
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.171.200:3307/gulimall_sms?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: root
+  #服务名
+  application:
+    name: gulimail-coupon
+  #nacos配置
+  cloud:
+    nacos:
+      server-addr: 127.0.0.1:8848
+
+#mp配置
+mybatis-plus:
+  global-config:
+    db-config:
+      id-type: auto
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

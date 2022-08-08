@@ -2,8 +2,10 @@ package com.lj.gulimail.product.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.lj.common.utils.PageUtils;
+import com.lj.gulimail.product.entity.BrandEntity;
 import com.lj.gulimail.product.entity.CategoryBrandRelationEntity;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -16,5 +18,10 @@ import java.util.Map;
 public interface CategoryBrandRelationService extends IService<CategoryBrandRelationEntity> {
 
     PageUtils queryPage(Map<String, Object> params);
+
+    
+    void saveDetail(CategoryBrandRelationEntity categoryBrandRelation);
+
+    List<BrandEntity> findBrandByCatelogId(Long catId);
 }
 

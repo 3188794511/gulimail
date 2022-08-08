@@ -13,6 +13,7 @@
         <result property="wareId" column="ware_id"/>
         <result property="status" column="status"/>
     </resultMap>
+    
 
 
 </mapper>

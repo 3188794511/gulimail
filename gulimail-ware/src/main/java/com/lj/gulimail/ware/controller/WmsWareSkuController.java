@@ -1,19 +1,16 @@
 package com.lj.gulimail.ware.controller;
 
-import java.util.Arrays;
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.lj.gulimail.ware.entity.WmsWareSkuEntity;
-import com.lj.gulimail.ware.service.WmsWareSkuService;
+import com.lj.common.to.es.SkuWareVo;
 import com.lj.common.utils.PageUtils;
 import com.lj.common.utils.R;
+import com.lj.gulimail.ware.entity.WmsWareSkuEntity;
+import com.lj.gulimail.ware.service.WmsWareSkuService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 
 
@@ -25,7 +22,7 @@ import com.lj.common.utils.R;
  * @date 2022-06-21 09:29:52
  */
 @RestController
-@RequestMapping("ware/wmswaresku")
+@RequestMapping("ware/waresku")
 public class WmsWareSkuController {
     @Autowired
     private WmsWareSkuService wmsWareSkuService;
@@ -50,7 +47,7 @@ public class WmsWareSkuController {
     public R info(@PathVariable("id") Long id){
 		WmsWareSkuEntity wmsWareSku = wmsWareSkuService.getById(id);
 
-        return R.ok().put("wmsWareSku", wmsWareSku);
+        return R.ok().put("wareSku", wmsWareSku);
     }
 
     /**
@@ -84,6 +81,14 @@ public class WmsWareSkuController {
 		wmsWareSkuService.removeByIds(Arrays.asList(ids));
 
         return R.ok();
+    }
+
+    @PostMapping("/hasStock")
+    public R hasStock(@RequestBody List<Long> skuIds){
+        List<SkuWareVo> skuWareVos = wmsWareSkuService.hasStockBySkuIds(skuIds);
+        R ok = R.ok();
+        ok.setData(skuWareVos);
+        return ok;
     }
 
 }

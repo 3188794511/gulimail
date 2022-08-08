@@ -1,19 +1,15 @@
 package com.lj.gulimail.coupon.controller;
 
-import java.util.Arrays;
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.lj.gulimail.coupon.entity.SmsSpuBoundsEntity;
-import com.lj.gulimail.coupon.service.SmsSpuBoundsService;
 import com.lj.common.utils.PageUtils;
 import com.lj.common.utils.R;
+import com.lj.gulimail.coupon.entity.SmsSpuBoundsEntity;
+import com.lj.gulimail.coupon.service.SmsSpuBoundsService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.Map;
 
 
 
@@ -25,7 +21,7 @@ import com.lj.common.utils.R;
  * @date 2022-06-20 17:32:15
  */
 @RestController
-@RequestMapping("coupon/smsspubounds")
+@RequestMapping("/coupon/smsspubounds")
 public class SmsSpuBoundsController {
     @Autowired
     private SmsSpuBoundsService smsSpuBoundsService;
@@ -59,8 +55,11 @@ public class SmsSpuBoundsController {
     @RequestMapping("/save")
     //@RequiresPermissions("coupon:smsspubounds:save")
     public R save(@RequestBody SmsSpuBoundsEntity smsSpuBounds){
-		smsSpuBoundsService.save(smsSpuBounds);
-
+        if (smsSpuBounds.getBuyBounds().compareTo(new BigDecimal(0)) ==1
+                || smsSpuBounds.getGrowBounds().compareTo(new BigDecimal(0)) == 1){
+            //当积分成长 购物积分其中一个大于0时,才保存
+            smsSpuBoundsService.save(smsSpuBounds);
+        }
         return R.ok();
     }
 

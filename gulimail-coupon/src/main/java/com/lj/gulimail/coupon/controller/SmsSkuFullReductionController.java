@@ -1,19 +1,15 @@
 package com.lj.gulimail.coupon.controller;
 
-import java.util.Arrays;
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.lj.gulimail.coupon.entity.SmsSkuFullReductionEntity;
-import com.lj.gulimail.coupon.service.SmsSkuFullReductionService;
+import com.lj.common.to.SkuFullReductionTo;
 import com.lj.common.utils.PageUtils;
 import com.lj.common.utils.R;
+import com.lj.gulimail.coupon.entity.SmsSkuFullReductionEntity;
+import com.lj.gulimail.coupon.service.SmsSkuFullReductionService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Arrays;
+import java.util.Map;
 
 
 
@@ -25,11 +21,11 @@ import com.lj.common.utils.R;
  * @date 2022-06-20 17:32:15
  */
 @RestController
-@RequestMapping("coupon/smsskufullreduction")
+@RequestMapping("/coupon/smsskufullreduction")
 public class SmsSkuFullReductionController {
     @Autowired
     private SmsSkuFullReductionService smsSkuFullReductionService;
-
+ 
     /**
      * 列表
      */
@@ -58,9 +54,8 @@ public class SmsSkuFullReductionController {
      */
     @RequestMapping("/save")
     //@RequiresPermissions("coupon:smsskufullreduction:save")
-    public R save(@RequestBody SmsSkuFullReductionEntity smsSkuFullReduction){
-		smsSkuFullReductionService.save(smsSkuFullReduction);
-
+    public R saveSkuFullReduction(@RequestBody SkuFullReductionTo skuFullReductionTo){
+        smsSkuFullReductionService.saveSkuFullReduction(skuFullReductionTo);
         return R.ok();
     }
 
@@ -71,7 +66,6 @@ public class SmsSkuFullReductionController {
     //@RequiresPermissions("coupon:smsskufullreduction:update")
     public R update(@RequestBody SmsSkuFullReductionEntity smsSkuFullReduction){
 		smsSkuFullReductionService.updateById(smsSkuFullReduction);
-
         return R.ok();
     }
 

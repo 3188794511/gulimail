@@ -16,5 +16,7 @@ import java.util.Map;
 public interface WmsPurchaseDetailService extends IService<WmsPurchaseDetailEntity> {
 
     PageUtils queryPage(Map<String, Object> params);
+
+    void updateByPurchaseId(Long id);
 }
 

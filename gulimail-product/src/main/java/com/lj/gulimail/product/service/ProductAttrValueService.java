@@ -3,7 +3,9 @@ package com.lj.gulimail.product.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.lj.common.utils.PageUtils;
 import com.lj.gulimail.product.entity.ProductAttrValueEntity;
+import com.lj.gulimail.product.vo.basevo.BaseAttrs;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -16,5 +18,9 @@ import java.util.Map;
 public interface ProductAttrValueService extends IService<ProductAttrValueEntity> {
 
     PageUtils queryPage(Map<String, Object> params);
+
+    void saveBatchBaseAttrs(Long id, List<BaseAttrs> baseAttrs);
+
+    List<ProductAttrValueEntity> getBaseAttrs(Long spuId);
 }
 

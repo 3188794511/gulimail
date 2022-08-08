@@ -12,18 +12,35 @@ spring:
             - Path=/api/product/**
           filters:
             - RewritePath=/api/(?<segment>/?.*),/$\{segment}
+        - id: member-route
+          uri: lb://gulimail-member
+          predicates:
+            - Path=/api/member/**
+          filters:
+            - RewritePath=/api/(?<segment>/?.*),/$\{segment}
+        - id: third-party-route
+          uri: lb://gulimail-third-party
+          predicates:
+            - Path=/api/thirdparty/**
+          filters:
+            - RewritePath=/api/(?<segment>.*),/$\{segment}
+        - id: gulimail-ware-route
+          uri: lb://gulimail-ware
+          predicates:
+            - Path=/api/ware/**
+          filters:
+            - RewritePath=/api/(?<segment>.*),/$\{segment}
         - id: admin-route
           uri: lb://renren-fast
           predicates:
             - Path=/api/**
           filters:
             - RewritePath=/api/(?<segment>/?.*),/renren-fast/$\{segment}
-        - id: third-party-route
-          uri: lb://gulimail-third-party
+        - id: gulimail-host-route
+          uri: lb://gulimail-product
           predicates:
-            - Path=/api/third-party/**
-          filters:
-            - RewritePath=/api/third-party/(?<segment>.*),/$\{segment}
-
+            - Host=gulimail.com,**.gulimail.com
   application:
     name: gulimail-gateway
+
+

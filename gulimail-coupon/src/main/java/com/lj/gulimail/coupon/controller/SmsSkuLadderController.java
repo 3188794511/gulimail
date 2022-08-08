@@ -1,19 +1,15 @@
 package com.lj.gulimail.coupon.controller;
 
-import java.util.Arrays;
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.lj.gulimail.coupon.entity.SmsSkuLadderEntity;
-import com.lj.gulimail.coupon.service.SmsSkuLadderService;
 import com.lj.common.utils.PageUtils;
 import com.lj.common.utils.R;
+import com.lj.gulimail.coupon.entity.SmsSkuLadderEntity;
+import com.lj.gulimail.coupon.service.SmsSkuLadderService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.Map;
 
 
 
@@ -59,7 +55,9 @@ public class SmsSkuLadderController {
     @RequestMapping("/save")
     //@RequiresPermissions("coupon:smsskuladder:save")
     public R save(@RequestBody SmsSkuLadderEntity smsSkuLadder){
-		smsSkuLadderService.save(smsSkuLadder);
+        if (smsSkuLadder.getDiscount().compareTo(new BigDecimal(0)) == 1 && smsSkuLadder.getFullCount() > 0){
+            smsSkuLadderService.save(smsSkuLadder);
+        }
 
         return R.ok();
     }

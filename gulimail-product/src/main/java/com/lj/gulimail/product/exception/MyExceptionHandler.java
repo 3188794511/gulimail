@@ -1,6 +1,7 @@
 package com.lj.gulimail.product.exception;
 
 import com.lj.common.utils.R;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -16,10 +17,12 @@ import static com.lj.gulimail.product.enums.MyExceptionEnum.VALID_EXCEPTION;
  * 全局异常处理
  */
 @RestControllerAdvice(basePackages = "com.lj.gulimail.product.controller")
+@Slf4j
 public class MyExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public R validExceptionHandler(MethodArgumentNotValidException e){
+        log.error(e.getMessage());
         BindingResult bindingResult = e.getBindingResult();
         Map<String,String> map = new HashMap<>();
         bindingResult.getAllErrors().forEach(item -> {
@@ -30,6 +33,7 @@ public class MyExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public R exceptionHandler(Exception e){
+        log.error(e.getMessage());
         return R.error(COMMON_EXCEPTION.getCode(),COMMON_EXCEPTION.getMsg()).put("data",e.getMessage());
     }
 
